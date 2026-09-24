@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "@/lib/CartContext";
+import { formatPrice } from "@/lib/currency";
 
 export default function CartDrawer() {
   const { list, subtotal, drawerOpen, setDrawerOpen, changeQty, removeItem, orderViaWhatsApp } = useCart();
@@ -27,7 +28,7 @@ export default function CartDrawer() {
                 <img className="thumb" src={product.images[0]} alt={product.name} />
                 <div className="line-info">
                   <h4>{product.name}</h4>
-                  <span>${Number(product.price).toFixed(2)}</span>
+                  <span>{formatPrice(product.price)}</span>
                   <div className="qty-row">
                     <button onClick={() => changeQty(product.id, -1)} aria-label="Decrease quantity">−</button>
                     <span>{qty}</span>
@@ -43,7 +44,7 @@ export default function CartDrawer() {
         <div className="drawer-foot">
           <div className="subtotal-row">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>{formatPrice(subtotal)}</span>
           </div>
           <button className="checkout-btn" disabled={list.length === 0} onClick={orderViaWhatsApp}>
             Order via WhatsApp

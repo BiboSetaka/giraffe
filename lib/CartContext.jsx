@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
+import { formatPrice } from "@/lib/currency";
 
 const CartContext = createContext(null);
 export const WHATSAPP_NUMBER = "26660000000"; // replace with the real Giraffe WhatsApp line
@@ -65,9 +66,9 @@ export function CartProvider({ children }) {
 
   function orderViaWhatsApp() {
     const lines = list.map(
-      (i) => `• ${i.product.name} x${i.qty} — $${(i.qty * Number(i.product.price)).toFixed(2)}`
+      (i) => `• ${i.product.name} x${i.qty} — ${formatPrice(i.qty * Number(i.product.price))}`
     );
-    const message = `Hi Giraffe! I'd like to order:\n${lines.join("\n")}\n\nTotal: $${subtotal.toFixed(2)}`;
+    const message = `Hi Giraffe! I'd like to order:\n${lines.join("\n")}\n\nTotal: ${formatPrice(subtotal)}`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
     clearCart();
