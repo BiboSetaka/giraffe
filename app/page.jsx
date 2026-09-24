@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/CartContext";
+import { formatPrice } from "@/lib/currency";
 
 const CATS = ["All", "Tops", "Outerwear", "Collab"];
 
@@ -82,7 +83,7 @@ export default function StorePage() {
               <div className="card-body">
                 <span className="tag">{p.tag}</span>
                 <h3 onClick={() => router.push(`/product/${p.id}`)}>{p.name}</h3>
-                <span className="price">${Number(p.price).toFixed(2)}</span>
+                <span className="price">{formatPrice(p.price)}</span>
                 <button className="add-btn" onClick={(e) => handleAdd(e, p)}>Add to cart</button>
               </div>
             </div>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useCart } from "@/lib/CartContext";
+import { formatPrice } from "@/lib/currency";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -87,7 +88,7 @@ export default function ProductPage() {
       <div className="pv-info">
         <span className="tag">{product.tag}</span>
         <h1>{product.name}</h1>
-        <span className="price">${Number(product.price).toFixed(2)}</span>
+          <span className="price">{formatPrice(product.price)}</span>
         <button className="add-btn" onClick={handleAdd}>Add to cart</button>
       </div>
 

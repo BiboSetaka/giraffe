@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { formatPrice } from "@/lib/currency";
 
 const EMPTY_FORM = { id: null, name: "", tag: "Tops", price: "", images: [] };
 
@@ -180,7 +181,7 @@ export default function AdminPage() {
             <img src={p.images[0]} alt={p.name} style={styles.cardImg} />
             <div style={styles.cardBody}>
               <strong>{p.name}</strong>
-              <span>{p.tag} · ${Number(p.price).toFixed(2)}</span>
+                  <span>{p.tag} · {formatPrice(p.price)}</span>
               <div style={styles.cardActions}>
                 <button onClick={() => editProduct(p)} style={styles.smallBtn}>Edit</button>
                 <button onClick={() => deleteProduct(p.id)} style={styles.smallBtnDanger}>Delete</button>
